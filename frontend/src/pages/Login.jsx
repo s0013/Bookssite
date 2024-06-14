@@ -1,39 +1,68 @@
-import React from 'react';
-import { Link } from 'react-router-dom'; // Assuming you are using React Router for navigation
+import React, { useState } from 'react';
+import axios from 'axios';
 
 const Login = () => {
+  const [formData, setFormData] = useState({
+    username: '',
+    password: ''
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('http://localhost:3000/login', formData);
+      if (response.data.message === 'Login successful') {
+        alert("Login successful!");
+        // Save the username and password (for demonstration purposes; not recommended for production)
+        localStorage.setItem('username', formData.username);
+        localStorage.setItem('password', formData.password);
+        // Redirect to UserPage
+        window.location.href = '/UserPage'; // Adjust as necessary
+      }
+    } catch (error) {
+      console.error("Error during API call:", error.response ? error.response.data : error.message);
+      alert("Invalid username or password. Please try again.");
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-      <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 className="text-center text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
-        <form className="mt-8 space-y-6" action="#" method="POST">
-          <div className="rounded-md shadow-sm -space-y-px">
-            <div>
-              <label htmlFor="username" className="sr-only">Username</label>
-              <input id="username" name="username" type="text" required className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Username" />
-            </div>
-            <div>
-              <label htmlFor="password" className="sr-only">Password</label>
-              <input id="password" name="password" type="password" required className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mt-2" placeholder="Password" />
-            </div>
-          </div>
-
-          <div className="flex items-center justify-between">
-            <div className="text-sm">
-              <Link to="/signup" className="font-medium text-indigo-600 hover:text-indigo-500">
-                Don't have an account? Sign up here.
-              </Link>
-            </div>
-          </div>
-
-          <div>
-            <button type="submit" className="w-full bg-indigo-600 text-white py-2 px-4 mt-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:bg-indigo-700">
-              Sign in
-            </button>
-          </div>
-        </form>
+    <form onSubmit={handleSubmit} className="max-w-md mx-auto p-4 bg-white shadow-md rounded-lg">
+      <div className="mb-4">
+        <label className="block text-gray-700 text-sm font-bold mb-2">Username:</label>
+        <input 
+          type="text" 
+          name="username" 
+          value={formData.username} 
+          onChange={handleChange} 
+          required 
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        />
       </div>
-    </div>
+      <div className="mb-4">
+        <label className="block text-gray-700 text-sm font-bold mb-2">Password:</label>
+        <input 
+          type="password" 
+          name="password" 
+          value={formData.password} 
+          onChange={handleChange} 
+          required 
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        />
+      </div>
+      <button 
+        type="submit" 
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+      >
+        Login
+      </button>
+    </form>
   );
 };
 
