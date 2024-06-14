@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate, Link } from 'react-router-dom'; // Import useNavigate and Link from react-router-dom
 
 const Signup = () => {
+  const navigate = useNavigate(); // Initialize useNavigate hook
+
   const [formData, setFormData] = useState({
     fullname: '',
     mobile: '',
@@ -27,6 +30,7 @@ const Signup = () => {
     try {
       const response = await axios.post('http://localhost:3000/signup', formData); // Ensure the URL is correct
       alert("User registered successfully!");
+      navigate('/login'); // Navigate to login page after successful registration
     } catch (error) {
       console.error("Error during API call:", error.response ? error.response.data : error.message);
       alert("An error occurred. Please try again.");
@@ -101,6 +105,7 @@ const Signup = () => {
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         />
       </div>
+      <p className="mt-2">Already registered? <Link to="/login" className="text-blue-500 hover:underline">Login here</Link></p>
       <button 
         type="submit" 
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
