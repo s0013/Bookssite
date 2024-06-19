@@ -48,11 +48,50 @@ app.post('/login', async (req, res) => {
     if (!user) {
       return res.status(401).json({ message: 'Invalid username or password' });
     }
+
+    // Store login time and date
+    user.loginTimes.push(new Date());
+    await user.save();
+
     res.status(200).json({ message: 'Login successful', user });
   } catch (error) {
     res.status(500).json({ message: 'Error logging in', error: error.message });
   }
 });
+
+// Logout Endpoint
+app.post('/logout', async (req, res) => {
+  const { username, logoutTime } = req.body;
+
+  try {
+    // Find user by username
+    const user = await User.findOne({ username });
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Update the logoutTimes array
+    user.logoutTimes.push(new Date(logoutTime));
+    await user.save();
+
+    res.status(200).json({ message: 'Logout successful' });
+  } catch (error) {
+    res.status(500).json({ message: 'Error logging out', error: error.message });
+  }
+});
+
+
+// Fetch Users Endpoint
+app.get('/users', async (req, res) => {
+  try {
+    const users = await User.find({ role: 'user' });
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching users', error: error.message });
+  }
+});
+
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

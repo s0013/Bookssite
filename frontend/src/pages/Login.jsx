@@ -19,9 +19,14 @@ const Login = () => {
     try {
       const response = await axios.post('http://localhost:3000/login', formData);
       alert(response.data.message);
-      // Add navigation to a different page if login is successful
       if (response.status === 200) {
-        navigate('/dashboard'); // Adjust the path as needed
+        const { role, username } = response.data.user; // Assuming the user role and username are returned from the backend
+        localStorage.setItem('username', username); // Store the username in local storage
+        if (role === 'admin') {
+          navigate('/AdminPage'); // Redirect to the admin page
+        } else {
+          navigate('/UserPage'); // Redirect to the user page
+        }
       }
     } catch (error) {
       alert(error.response?.data?.message || 'Error logging in');

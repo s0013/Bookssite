@@ -1,10 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 
 const Customer = () => {
+  const [username, setUsername] = useState(localStorage.getItem('username'));
+
+  const handleLogout = () => {
+    const logoutTime = new Date().toISOString();
+
+    axios.post('http://localhost:3000/logout', { username, logoutTime })
+      .then(response => {
+        console.log(response.data.message); // Assuming your backend sends a message
+        localStorage.removeItem('username');
+        setUsername('');
+      })
+      .catch(error => {
+        console.error('Logout error:', error);
+      });
+  };
+
   return (
-    <div className="max-w-md mx-auto p-4 bg-white shadow-md rounded-lg">
-      <h1 className="text-2xl font-bold text-gray-700 mb-4">Welcome, User!</h1>
-      <p className="text-gray-600">This is the user page. You are logged in successfully.</p>
+    <div>
+      {username && <div>Welcome {username}</div>}
+      <button onClick={handleLogout}>Logout</button>
     </div>
   );
 };

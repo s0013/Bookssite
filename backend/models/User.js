@@ -31,8 +31,16 @@ const userSchema = new mongoose.Schema({
     type: String,
     enum: ['admin', 'user'],
     default: 'user'
+  },
+  loginTimes: {
+    type: [Date],
+    default: []
+  },
+  logoutTimes: {
+    type: [Date],
+    default: []
   }
-}, { timestamps: true });
+});
 
 const User = mongoose.model('User', userSchema);
 
