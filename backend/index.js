@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const User = require('./models/User');
+const Book = require('./models/Book');
 const app = express();
 const PORT = process.env.PORT || 3000;
 const MONGODB_URL = 'mongodb+srv://shrusonawane7:1234@cluster0.wvl2naz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
@@ -89,6 +90,73 @@ app.get('/users', async (req, res) => {
     res.status(200).json(users);
   } catch (error) {
     res.status(500).json({ message: 'Error fetching users', error: error.message });
+  }
+});
+
+
+app.post('/submit', async (req, res) => {
+  try {
+    const { publishername, bookname, author, imageurl, description, publisherdate, price, totalcopies } = req.body;
+    const book = new Book({
+      publishername,
+      authors: {
+        bookname,
+        author,
+        imageurl,
+        description,
+        publisherdate,
+        price,
+        totalcopies
+      }
+    });
+    await book.save();
+    res.status(201).send('Book details saved successfully!');
+  } catch (error) {
+    res.status(400).send('Error saving book details: ' + error.message);
+  }
+});
+
+
+
+// Fetch all books
+app.get('/books', async (req, res) => {
+  try {
+    const books = await Book.find();
+    res.json(books);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching books data', error: error.message });
+  }
+});
+
+// Delete a book by ID
+app.delete('/books/:id', async (req, res) => {
+  try {
+    const book = await Book.findByIdAndDelete(req.params.id);
+    if (!book) return res.status(404).send('Book not found');
+    res.json({ success: true });
+  } catch (error) {
+    console.error('Error deleting book:', error);
+    res.status(500).send('Server error');
+  }
+});
+
+// Update a book by ID
+app.put('/books/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updatedBook = req.body;
+
+    // Ensure the book exists before attempting an update
+    const book = await Book.findByIdAndUpdate(id, updatedBook, { new: true, runValidators: true });
+
+    if (!book) {
+      return res.status(404).json({ error: 'Book not found' });
+    }
+
+    res.json(book);
+  } catch (error) {
+    console.error('Error updating book:', error);
+    res.status(500).json({ error: 'Server error' });
   }
 });
 

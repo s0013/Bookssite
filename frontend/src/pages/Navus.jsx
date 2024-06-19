@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Navbar = ({ handleLogout, handleAddBook, handleViewDetails }) => {
+const Navus = ({ handleLogout, handleAddBook, handleViewDetails }) => {
   return (
     <nav className="bg-gray-800 p-4">
       <div className="container mx-auto flex justify-between items-center">
@@ -30,4 +30,4 @@ const Navbar = ({ handleLogout, handleAddBook, handleViewDetails }) => {
   );
 };
 
-export default Navbar;
+export default Navus;

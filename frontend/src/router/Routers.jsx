@@ -13,6 +13,7 @@ import Navus from '../pages/Navus';
 import Wishlist from '../pages/Wishlist';
 import ViewDetails from '../pages/ViewDetails';
 import About from '../pages/About';
+import Carousal from '../pages/Carousal';
 
 const Routers = () => {
   return (
@@ -32,6 +33,7 @@ const Routers = () => {
           <Route path="/Wishlist" element={<Wishlist/>} />
           <Route path="/ViewDetails" element={<ViewDetails/>} />
           <Route path="/about" element={<About/>} />
+          <Route path="/Carousal" element={<Carousal />} />
         </Routes>
       
     </>
