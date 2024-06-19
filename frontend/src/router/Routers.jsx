@@ -4,7 +4,7 @@ import Home from '../pages/Home';
 import Login from '../pages/Login';
 import Signup from '../pages/Signup';
 // import Validation from '../pages/Validation';
-import Destination from '../pages/Destination';
+import Blogs from '../pages/Blogs';
 import AdminPage from '../pages/Boss';
 import Customer from '../pages/Customer';
 import Navbar from '../pages/Navbar';
@@ -23,7 +23,7 @@ const Routers = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/Signup" element={<Signup />} />
           {/* <Route path="/Validation" element={<Validation />} /> */}
-          <Route path="/Destination" element={<Destination />}/>
+          <Route path="/blogs" element={<Blogs />}/>
           <Route path="/AdminPage" element={<AdminPage />} />
           <Route path="/UserPage" element={<Customer/>} />
           <Route path="/Navbar" element={<Navbar />} />

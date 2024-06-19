@@ -29,9 +29,9 @@ const Header = () => {
                   <FaHome className="mr-1" />
                   <span>Home</span>
                 </NavLink>
-                <NavLink to="/destination" activeClassName="text-white" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center">
+                <NavLink to="/blogs" activeClassName="text-white" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center">
                   <FaMapMarkerAlt className="mr-1" />
-                  <span>Destination</span>
+                  <span>Blogs</span>
                 </NavLink>
                 <NavLink to="/about" activeClassName="text-white" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center">
                   <FaUserAlt className="mr-1" />
