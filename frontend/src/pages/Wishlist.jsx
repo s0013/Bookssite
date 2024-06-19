@@ -1,5 +1,6 @@
 import React from 'react';
 import { RiDeleteBinLine } from 'react-icons/ri';
+import Back from './Back';
 
 const Wishlist = () => {
   const wishlistItems = JSON.parse(localStorage.getItem('wishlist')) || [];
@@ -17,6 +18,7 @@ const Wishlist = () => {
   return (
     <div>
       <h1 className="text-2xl font-bold mb-4 text-center">Wishlist</h1>
+      <Back />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 px-4 mb-4">
         {wishlistItems.length === 0 ? (
           <p>Your wishlist is empty.</p>

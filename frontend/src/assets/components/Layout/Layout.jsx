@@ -9,7 +9,7 @@ const Layout = () => {
 
   return (
     <>
-      <Header hideNavbar={location.pathname.includes('UserPage') || location.pathname.includes('AdminPage') || location.pathname.includes('adminPage') || location.pathname.includes('ViewDetails')} />
+      <Header hideNavbar={location.pathname.includes('UserPage') || location.pathname.includes('AdminPage') || location.pathname.includes('adminPage') || location.pathname.includes('ViewDetails') || location.pathname.includes('wishlist')} />
       <Routers />
       <Footer />
     </>

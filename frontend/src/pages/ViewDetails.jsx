@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FaEdit, FaTrash, FaSave, FaTimes } from 'react-icons/fa';
+import Back from './Back';
+
 
 const ViewDetails = () => {
   const [books, setBooks] = useState([]);
@@ -88,6 +90,7 @@ const ViewDetails = () => {
   return (
     <div className="min-h-screen bg-gray-100">
       <div className="container mx-auto p-4">
+      <Back />
         <div className="overflow-x-auto">
           <table className="min-w-full bg-white border border-gray-300">
             <thead>
