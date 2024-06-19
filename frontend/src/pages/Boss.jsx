@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Navus from './Navus'; // Assuming Navus.jsx is in the same directory
 
 const Boss = () => {
   const [users, setUsers] = useState([]);
@@ -36,6 +37,7 @@ const Boss = () => {
 
   return (
     <div className="overflow-x-auto">
+      <Navus />
       <h2 className="text-xl font-semibold mb-4">User List</h2>
       <table className="min-w-full">
         <thead>
