@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import Navus from './Navbar';
 import { FaHeart } from 'react-icons/fa';
 import ReactPaginate from 'react-paginate';
 import Carousal from './Carousal'; // Import the Carousal component
 import Navbar from './Navbar';
+import Modal from './Modal'; // Import the Modal component
 
 const Customer = () => {
   const [username, setUsername] = useState('');
@@ -13,7 +13,9 @@ const Customer = () => {
   const [expandedDescriptions, setExpandedDescriptions] = useState({});
   const [pageNumber, setPageNumber] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');
-  const booksPerPage = 6; // Number of books per page
+  const [modalContent, setModalContent] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const booksPerPage = 6;
   const pagesVisited = pageNumber * booksPerPage;
   const navigate = useNavigate();
 
@@ -47,16 +49,15 @@ const Customer = () => {
     fetchBooks();
   }, []);
 
-
   const handleLogout = () => {
     const logoutTime = new Date().toISOString();
 
     axios.post('http://localhost:3000/logout', { username, logoutTime })
       .then(response => {
-        console.log(response.data.message); // Assuming your backend sends a message
+        console.log(response.data.message);
         localStorage.removeItem('username');
         setUsername('');
-        navigate('/login'); // Navigate to the login page
+        navigate('/login');
       })
       .catch(error => {
         console.error('Logout error:', error);
@@ -68,6 +69,16 @@ const Customer = () => {
       ...prevState,
       [index]: !prevState[index],
     }));
+  };
+
+  const openModal = (description) => {
+    setModalContent(description);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setModalContent('');
   };
 
   const addToWishlist = (book) => {
@@ -83,7 +94,7 @@ const Customer = () => {
 
   const handleSearch = (event) => {
     setSearchQuery(event.target.value);
-    setPageNumber(0); // Reset to first page when a new search is made
+    setPageNumber(0);
   };
 
   const filteredBooks = books.filter(book =>
@@ -92,19 +103,22 @@ const Customer = () => {
     book.authors.author.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  const buyBook = (book) => {
+    navigate('/buy', { state: { book } });
+  };
+
   return (
     <div>
       <Navbar username={username} handleLogout={handleLogout} />
-      <Carousal /> {/* Add the Carousal component here */}
+      <Carousal />
       <div className="flex justify-center mt-4">
-      <input
-  type="text"
-  placeholder="Search by Publisher, Author, or Book Name"
-  value={searchQuery}
-  onChange={handleSearch}
-  className="border border-gray-300 px-4 py-2 rounded-lg w-1/2 bg-gray-200 text-black" // Custom styles for the search bar
-/>
-
+        <input
+          type="text"
+          placeholder="Search by Publisher, Author, or Book Name"
+          value={searchQuery}
+          onChange={handleSearch}
+          className="border border-gray-300 px-4 py-2 rounded-lg w-1/2 bg-gray-200 text-black"
+        />
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-8 mx-8 mb-8">
         {filteredBooks.slice(pagesVisited, pagesVisited + booksPerPage).map((book, index) => (
@@ -121,47 +135,53 @@ const Customer = () => {
                   <p className="text-gray-600 font-semibold">Book Name: {book.authors.bookname}</p>
                 </div>
                 <p className="text-gray-600 mb-2 font-semibold">Author: {book.authors.author}</p>
+                <p className="text-gray-600 font-semibold">Price: ${book.authors.price}</p>
                 <p className="text-gray-700">
                   {expandedDescriptions[index] ? book.authors.description : `${book.authors.description.slice(0, 100)}...`}
                   <button
-                    onClick={() => toggleDescription(index)}
+                    onClick={() => openModal(book.authors.description)}
                     className="text-blue-500 hover:text-blue-700 ml-1"
                   >
                     {expandedDescriptions[index] ? 'Show Less' : 'Read More'}
                   </button>
                 </p>
-                <button
-                  onClick={() => addToWishlist(book)}
-                  className="flex items-center mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
-                >
-                  <FaHeart className="mr-2" />
-                  Add to Wishlist
-                </button>
+                <div className="flex justify-between mt-4 w-full">
+                  <button
+                    onClick={() => addToWishlist(book)}
+                    className="flex items-center bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 mr-2"
+                  >
+                    <FaHeart className="mr-2" />
+                    Add to Wishlist
+                  </button>
+                  <button
+                    onClick={() => buyBook(book)}
+                    className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600"
+                  >
+                    Buy
+                  </button>
+                </div>
               </>
             )}
           </div>
         ))}
       </div>
       <div className="flex justify-center mt-8 mb-8">
-      <ReactPaginate
-  previousLabel={'Previous'}
-  nextLabel={'Next'}
-  pageCount={pageCount}
-  onPageChange={changePage}
-  containerClassName={'flex justify-center mt-4 space-x-2'}
-  previousLinkClassName={
-    'border border-gray-300 px-3 py-1 rounded-full hover:bg-gray-200 transition duration-300 ease-in-out'
-  }
-  nextLinkClassName={
-    'border border-gray-300 px-3 py-1 rounded-full hover:bg-gray-200 transition duration-300 ease-in-out'
-  }
-  disabledClassName={'opacity-50 cursor-not-allowed'}
-  activeClassName={'bg-blue-500 text-white border-blue-500 px-3 py-1 rounded-full'}
-  pageClassName={'border border-gray-300 px-3 py-1 rounded-full hover:bg-gray-200 transition duration-300 ease-in-out'}
-  pageLinkClassName={'focus:outline-none'}
-  breakClassName={'px-3 py-1'}
-/>
+        <ReactPaginate
+          previousLabel={'Previous'}
+          nextLabel={'Next'}
+          pageCount={pageCount}
+          onPageChange={changePage}
+          containerClassName={'flex justify-center mt-4 space-x-2'}
+          previousLinkClassName={'border border-gray-300 px-3 py-1 rounded-full hover:bg-gray-200 transition duration-300 ease-in-out'}
+          nextLinkClassName={'border border-gray-300 px-3 py-1 rounded-full hover:bg-gray-200 transition duration-300 ease-in-out'}
+          disabledClassName={'opacity-50 cursor-not-allowed'}
+          activeClassName={'bg-blue-500 text-white border-blue-500 px-3 py-1 rounded-full'}
+          pageClassName={'border border-gray-300 px-3 py-1 rounded-full hover:bg-gray-200 transition duration-300 ease-in-out'}
+          pageLinkClassName={'focus:outline-none'}
+          breakClassName={'px-3 py-1'}
+        />
       </div>
+      <Modal isOpen={isModalOpen} onClose={closeModal} content={modalContent} />
     </div>
   );
 };

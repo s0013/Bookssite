@@ -15,6 +15,9 @@ import ViewDetails from '../pages/ViewDetails';
 import About from '../pages/About';
 import Carousal from '../pages/Carousal';
 import Back from '../pages/Back';
+import Buy from '../pages/Buy';
+import Modal from '../pages/Modal';
+
 
 const Routers = () => {
   return (
@@ -36,6 +39,9 @@ const Routers = () => {
           <Route path="/about" element={<About/>} />
           <Route path="/Carousal" element={<Carousal />} />
           <Route path="/Back" element={<Back />} />
+          <Route path="/Buy" element={<Buy />} />
+          <Route path="/Model" element={<Modal />} />
+        
         </Routes>
       
     </>

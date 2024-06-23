@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const User = require('./models/User');
 const Book = require('./models/Book');
+const Purchase = require('./models/Purchase'); // Import the Purchase model
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 const MONGODB_URL = 'mongodb+srv://shrusonawane7:1234@cluster0.wvl2naz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
@@ -32,7 +34,7 @@ app.post('/signup', async (req, res) => {
   const role = email.endsWith('numetry.com') ? 'admin' : 'user';
 
   try {
-    const newUser = new User({ fullname, mobile, email, username, password,confirmpassword, role });
+    const newUser = new User({ fullname, mobile, email, username, password, confirmpassword, role });
     await newUser.save();
     res.status(201).json({ message: 'User registered successfully' });
   } catch (error) {
@@ -82,7 +84,6 @@ app.post('/logout', async (req, res) => {
   }
 });
 
-
 // Fetch Users Endpoint
 app.get('/users', async (req, res) => {
   try {
@@ -93,7 +94,7 @@ app.get('/users', async (req, res) => {
   }
 });
 
-
+// Submit Book Endpoint
 app.post('/submit', async (req, res) => {
   try {
     const { publishername, bookname, author, imageurl, description, publisherdate, price, totalcopies } = req.body;
@@ -115,8 +116,6 @@ app.post('/submit', async (req, res) => {
     res.status(400).send('Error saving book details: ' + error.message);
   }
 });
-
-
 
 // Fetch all books
 app.get('/books', async (req, res) => {
@@ -160,6 +159,25 @@ app.put('/books/:id', async (req, res) => {
   }
 });
 
+// Purchase Endpoint
+app.post('/purchase', async (req, res) => {
+  const { username, book, address, numCopies, totalPrice } = req.body;
+
+  try {
+    const newPurchase = new Purchase({
+      username,
+      book,
+      address,
+      numCopies,
+      totalPrice,
+    });
+
+    await newPurchase.save();
+    res.status(201).json({ message: 'Purchase successful' });
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to create purchase' });
+  }
+});
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

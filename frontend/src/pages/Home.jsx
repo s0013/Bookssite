@@ -1,9 +1,13 @@
-import React from 'react'
+import React from 'react';
+import Carousel from '../pages/Carousal'; // Adjust the import path if needed
 
 const Home = () => {
   return (
-    <div>Home</div>
-  )
-}
+    <div>
 
-export default Home
+      <Carousel />
+    </div>
+  );
+};
+
+export default Home;
