@@ -6,6 +6,9 @@ export default {
   ],
   theme: {
     extend: {},
+    fontFamily: {
+      cursive: ['Caveat', 'cursive'], // Use the name of your cursive font here
+    },
   },
   plugins: [],
 }

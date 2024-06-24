@@ -18,7 +18,8 @@ import Back from '../pages/Back';
 import Buy from '../pages/Buy';
 import Modal from '../pages/Modal';
 import Purchases from '../pages/Purchases';
-
+import BooksByCategory from '../pages/BooksByCategory';
+import All from '../pages/All'
 
 const Routers = () => {
   return (
@@ -42,7 +43,8 @@ const Routers = () => {
       <Route path="/Buy" element={<Buy />} />
       <Route path="/Model" element={<Modal />} />
       <Route path="/Purchases" element={<Purchases />} />
-   
+      <Route path="/BooksByCategory" element={<BooksByCategory />} />
+      <Route path="/All" element={<All />} />
 
     </Routes>
   );
