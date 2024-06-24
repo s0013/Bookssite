@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 const AddBook = () => {
   const [formData, setFormData] = useState({
     publishername: '',
+    categories: '',
     bookname: '',
     author: '',
     imageurl: '',
@@ -11,12 +12,18 @@ const AddBook = () => {
     publisherdate: '',
     price: '',
     totalcopies: '',
+    newarrival: false,
+    availablecopies: '',
   });
 
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value, type, checked } = e.target;
+    setFormData({
+      ...formData,
+      [name]: type === 'checkbox' ? checked : value,
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -49,6 +56,10 @@ const AddBook = () => {
           <input className="w-full p-2 border border-gray-300 rounded" type="text" id="publishername" name="publishername" value={formData.publishername} onChange={handleChange} required />
         </div>
         <div>
+          <label className="block text-sm font-medium" htmlFor="categories">Category:</label>
+          <input className="w-full p-2 border border-gray-300 rounded" type="text" id="categories" name="categories" value={formData.categories} onChange={handleChange} required />
+        </div>
+        <div>
           <label className="block text-sm font-medium" htmlFor="bookname">Book Name:</label>
           <input className="w-full p-2 border border-gray-300 rounded" type="text" id="bookname" name="bookname" value={formData.bookname} onChange={handleChange} required />
         </div>
@@ -75,6 +86,14 @@ const AddBook = () => {
         <div>
           <label className="block text-sm font-medium" htmlFor="totalcopies">Total Copies:</label>
           <input className="w-full p-2 border border-gray-300 rounded" type="number" id="totalcopies" name="totalcopies" value={formData.totalcopies} onChange={handleChange} required />
+        </div>
+        <div>
+          <label className="block text-sm font-medium" htmlFor="newarrival">New Arrival:</label>
+          <input className="w-full p-2 border border-gray-300 rounded" type="checkbox" id="newarrival" name="newarrival" checked={formData.newarrival} onChange={handleChange} />
+        </div>
+        <div>
+          <label className="block text-sm font-medium" htmlFor="availablecopies">Available Copies:</label>
+          <input className="w-full p-2 border border-gray-300 rounded" type="number" id="availablecopies" name="availablecopies" value={formData.availablecopies} onChange={handleChange} required />
         </div>
         <button className="w-full bg-blue-500 text-white p-2 rounded" type="submit">Submit</button>
       </form>

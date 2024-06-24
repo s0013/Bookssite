@@ -64,17 +64,18 @@ const Customer = () => {
       });
   };
 
-  const toggleDescription = (index) => {
-    setExpandedDescriptions((prevState) => ({
-      ...prevState,
-      [index]: !prevState[index],
-    }));
-  };
+  // const toggleDescription = (index) => {
+  //   setExpandedDescriptions((prevState) => ({
+  //     ...prevState,
+  //     [index]: !prevState[index],
+  //   }));
+  // };
 
-  const openModal = (description) => {
-    setModalContent(description);
+  const openModal = (book) => {
+    setModalContent(book);
     setIsModalOpen(true);
   };
+  
 
   const closeModal = () => {
     setIsModalOpen(false);
@@ -132,14 +133,16 @@ const Customer = () => {
                 />
                 <div className="mb-2">
                   <p className="text-gray-600 font-semibold">Publisher Name: {book.publishername}</p>
+                  <p className="text-gray-600 font-semibold">Category: {book.categories}</p>
                   <p className="text-gray-600 font-semibold">Book Name: {book.authors.bookname}</p>
+                  <p className="text-gray-600 mb-2 font-semibold">Author: {book.authors.author}</p>
                 </div>
-                <p className="text-gray-600 mb-2 font-semibold">Author: {book.authors.author}</p>
+                
                 <p className="text-gray-600 font-semibold">Price: ${book.authors.price}</p>
                 <p className="text-gray-700">
                   {expandedDescriptions[index] ? book.authors.description : `${book.authors.description.slice(0, 100)}...`}
                   <button
-                    onClick={() => openModal(book.authors.description)}
+                    onClick={() => openModal(book)}
                     className="text-blue-500 hover:text-blue-700 ml-1"
                   >
                     {expandedDescriptions[index] ? 'Show Less' : 'Read More'}
@@ -181,7 +184,7 @@ const Customer = () => {
           breakClassName={'px-3 py-1'}
         />
       </div>
-      <Modal isOpen={isModalOpen} onClose={closeModal} content={modalContent} />
+      <Modal isOpen={isModalOpen} onClose={closeModal} book={modalContent} />
     </div>
   );
 };

@@ -94,12 +94,26 @@ app.get('/users', async (req, res) => {
   }
 });
 
-// Submit Book Endpoint
+// Add a new book
 app.post('/submit', async (req, res) => {
   try {
-    const { publishername, bookname, author, imageurl, description, publisherdate, price, totalcopies } = req.body;
+    const {
+      publishername,
+      categories,
+      bookname,
+      author,
+      imageurl,
+      description,
+      publisherdate,
+      price,
+      totalcopies,
+      newarrival,
+      availablecopies
+    } = req.body;
+
     const book = new Book({
       publishername,
+      categories,
       authors: {
         bookname,
         author,
@@ -107,9 +121,12 @@ app.post('/submit', async (req, res) => {
         description,
         publisherdate,
         price,
-        totalcopies
+        totalcopies,
+        newarrival,
+        availablecopies
       }
     });
+
     await book.save();
     res.status(201).send('Book details saved successfully!');
   } catch (error) {
@@ -143,14 +160,39 @@ app.delete('/books/:id', async (req, res) => {
 app.put('/books/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const updatedBook = req.body;
+    const {
+      publishername,
+      categories,
+      bookname,
+      author,
+      imageurl,
+      description,
+      publisherdate,
+      price,
+      totalcopies,
+      newarrival,
+      availablecopies
+    } = req.body;
 
     // Ensure the book exists before attempting an update
-    const book = await Book.findByIdAndUpdate(id, updatedBook, { new: true, runValidators: true });
-
+    const book = await Book.findById(id);
     if (!book) {
       return res.status(404).json({ error: 'Book not found' });
     }
+
+    book.publishername = publishername;
+    book.categories = categories;
+    book.authors.bookname = bookname;
+    book.authors.author = author;
+    book.authors.imageurl = imageurl;
+    book.authors.description = description;
+    book.authors.publisherdate = publisherdate;
+    book.authors.price = price;
+    book.authors.totalcopies = totalcopies;
+    book.authors.newarrival = newarrival;
+    book.authors.availablecopies = availablecopies;
+
+    await book.save();
 
     res.json(book);
   } catch (error) {
@@ -176,6 +218,17 @@ app.post('/purchase', async (req, res) => {
     res.status(201).json({ message: 'Purchase successful' });
   } catch (error) {
     res.status(500).json({ error: 'Failed to create purchase' });
+  }
+});
+
+// Define a route to fetch all purchases
+app.get('/purchases', async (req, res) => {
+  try {
+    const purchases = await Purchase.find();
+    res.json(purchases);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
   }
 });
 

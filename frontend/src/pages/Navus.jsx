@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Navus = ({ handleLogout, handleAddBook, handleViewDetails }) => {
+const Navus = ({ handleLogout, handleAddBook, handleViewDetails , handlePurchaseDetails }) => {
   return (
-    <nav className="bg-gray-800 p-4">
+    <nav className="bg-gray-800 p-4 sticky top-0 z-50">
       <div className="container mx-auto flex justify-between items-center">
         <h1 className="text-white text-3xl font-bold">Welcome to the Admin Dashboard</h1>
         <div>
@@ -17,6 +17,12 @@ const Navus = ({ handleLogout, handleAddBook, handleViewDetails }) => {
             className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition duration-200 mr-4"
           >
             View Details
+          </button>
+          <button
+            onClick={handlePurchaseDetails}
+            className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition duration-200 mr-4"
+          >
+            Buy Details
           </button>
           <button
             onClick={handleLogout}

@@ -1,9 +1,11 @@
 import React from 'react';
 import { RiDeleteBinLine } from 'react-icons/ri';
+import { useNavigate } from 'react-router-dom';
 import Back from './Back';
 
 const Wishlist = () => {
   const wishlistItems = JSON.parse(localStorage.getItem('wishlist')) || [];
+  const navigate = useNavigate();
 
   const removeFromWishlist = (index) => {
     const updatedWishlist = wishlistItems.filter((item, i) => i !== index);
@@ -12,7 +14,7 @@ const Wishlist = () => {
   };
 
   const handleBuy = (item) => {
-    console.log('Buying item:', item);
+    navigate('/buy', { state: { book: item } });
   };
 
   return (
@@ -24,7 +26,10 @@ const Wishlist = () => {
           <p>Your wishlist is empty.</p>
         ) : (
           wishlistItems.map((item, index) => (
-            <div key={index} className="bg-white rounded-lg shadow-lg px-4 py-4 flex flex-col items-center transform transition-transform hover:scale-105 hover:shadow-xl relative">
+            <div
+              key={index}
+              className="bg-white rounded-lg shadow-lg px-4 py-4 flex flex-col items-center transform transition-transform hover:scale-105 hover:shadow-xl relative"
+            >
               {item.authors && (
                 <>
                   <button

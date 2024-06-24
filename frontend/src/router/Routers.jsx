@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Home from '../pages/Home';
 import Login from '../pages/Login';
 import Signup from '../pages/Signup';
@@ -17,34 +17,34 @@ import Carousal from '../pages/Carousal';
 import Back from '../pages/Back';
 import Buy from '../pages/Buy';
 import Modal from '../pages/Modal';
+import Purchases from '../pages/Purchases';
 
 
 const Routers = () => {
   return (
-    <>
-    
-        <Routes>
-          <Route path="/home" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/Signup" element={<Signup />} />
-          {/* <Route path="/Validation" element={<Validation />} /> */}
-          <Route path="/blogs" element={<Blogs />}/>
-          <Route path="/AdminPage" element={<AdminPage />} />
-          <Route path="/UserPage" element={<Customer/>} />
-          <Route path="/Navbar" element={<Navbar />} />
-          <Route path="/Addbook" element={<AddBook />} />
-          <Route path="/Navus" element={<Navus />} />
-          <Route path="/Wishlist" element={<Wishlist/>} />
-          <Route path="/ViewDetails" element={<ViewDetails/>} />
-          <Route path="/about" element={<About/>} />
-          <Route path="/Carousal" element={<Carousal />} />
-          <Route path="/Back" element={<Back />} />
-          <Route path="/Buy" element={<Buy />} />
-          <Route path="/Model" element={<Modal />} />
-        
-        </Routes>
-      
-    </>
+    <Routes>
+      <Route path="/" element={<Navigate to="/home" />} />
+      <Route path="/home" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/Signup" element={<Signup />} />
+      {/* <Route path="/Validation" element={<Validation />} /> */}
+      <Route path="/blogs" element={<Blogs />} />
+      <Route path="/AdminPage" element={<AdminPage />} />
+      <Route path="/UserPage" element={<Customer />} />
+      <Route path="/Navbar" element={<Navbar />} />
+      <Route path="/Addbook" element={<AddBook />} />
+      <Route path="/Navus" element={<Navus />} />
+      <Route path="/Wishlist" element={<Wishlist />} />
+      <Route path="/ViewDetails" element={<ViewDetails />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/Carousal" element={<Carousal />} />
+      <Route path="/Back" element={<Back />} />
+      <Route path="/Buy" element={<Buy />} />
+      <Route path="/Model" element={<Modal />} />
+      <Route path="/Purchases" element={<Purchases />} />
+   
+
+    </Routes>
   );
 };
 

@@ -1,8 +1,11 @@
 const mongoose = require('mongoose');
 
-// Define the book schema
 const bookSchema = new mongoose.Schema({
   publishername: { 
+    type: String, 
+    required: true 
+  },
+  categories: {
     type: String, 
     required: true 
   },
@@ -13,10 +16,11 @@ const bookSchema = new mongoose.Schema({
     description: { type: String, required: true },
     publisherdate: { type: Date, required: true },
     price: { type: Number, required: true },
-    totalcopies: { type: Number, required: true }
+    totalcopies: { type: Number, required: true },
+    newarrival: { type: Boolean, required: true },
+    availablecopies: { type: Number, required: true }
   }
 });
 
-// Create a model from the schema
 const BookModel = mongoose.model('Book', bookSchema);
 module.exports = BookModel;

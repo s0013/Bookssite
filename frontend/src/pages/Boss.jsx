@@ -46,6 +46,10 @@ const Boss = () => {
     navigate('/ViewDetails');
   };
 
+  const handlePurchaseDetails = (userId) => {
+    navigate('/Purchases');
+  };
+
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', {
@@ -74,7 +78,7 @@ const Boss = () => {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <Navbar handleLogout={handleLogout} handleAddBook={handleAddBook} handleViewDetails={handleViewDetails} />
+      <Navbar handleLogout={handleLogout} handleAddBook={handleAddBook} handleViewDetails={handleViewDetails} handlePurchaseDetails={handlePurchaseDetails} />
       <div className="container mx-auto p-4">
         <div className="overflow-x-auto">
           <table className="min-w-full bg-white border border-gray-300">
@@ -127,6 +131,7 @@ const Boss = () => {
                     <button 
                       className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
                       onClick={() => handleDelete(user._id)}>Delete</button>
+                  
                   </td>
                 </tr>
               ))}

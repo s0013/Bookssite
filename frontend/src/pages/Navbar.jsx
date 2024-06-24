@@ -25,7 +25,7 @@ const Navbar = ({ username, handleLogout }) => {
   }, []);
 
   return (
-    <nav className="bg-gray-800 py-4">
+    <nav className="bg-gray-800 py-4 sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center">
           <Link to="/" className="text-white font-bold text-lg">My Bookstore</Link>
