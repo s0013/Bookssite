@@ -20,6 +20,10 @@ import Modal from '../pages/Modal';
 import Purchases from '../pages/Purchases';
 import BooksByCategory from '../pages/BooksByCategory';
 import All from '../pages/All'
+import EnquiryForm from '../pages/EnquiryForm'
+import Arrival from '../pages/Arrival';
+import Ad from '../pages/Ad';
+
 
 const Routers = () => {
   return (
@@ -45,6 +49,10 @@ const Routers = () => {
       <Route path="/Purchases" element={<Purchases />} />
       <Route path="/BooksByCategory" element={<BooksByCategory />} />
       <Route path="/All" element={<All />} />
+      <Route path="/EnquiryForm" element={<EnquiryForm />} />
+      <Route path="/Arrival" element={<Arrival />} />
+      <Route path="/Ad" element={<Ad />} />
+  
 
     </Routes>
   );

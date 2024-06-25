@@ -4,6 +4,7 @@ const cors = require('cors');
 const User = require('./models/User');
 const Book = require('./models/Book');
 const Purchase = require('./models/Purchase'); // Import the Purchase model
+const Enquiry = require('./models/Enquiry');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -232,6 +233,18 @@ app.get('/purchases', async (req, res) => {
   }
 });
 
+// Add a new enquiry
+app.post('/enquiry', async (req, res) => {
+  const { name, email, mobile, query } = req.body;
+
+  try {
+    const enquiry = new Enquiry({ name, email, mobile, query });
+    await enquiry.save();
+    res.status(201).json({ message: 'Enquiry saved successfully' });
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to save enquiry' });
+  }
+});
 
 
 

@@ -33,7 +33,7 @@ const All = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 bg-gradient-to-r from-yellow-500 to-gray-200 rounded-lg shadow-lg bg ">
+    <div className="container mx-auto px-4 py-8 bg-gradient-to-r from-yellow-500 to-gray-200  shadow-lg bg ">
         <Back />
     <h1 className="text-3xl font-bold mb-6 font-cursive text-center">Books by Category You Can Choose Anyone</h1>
 
