@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Back from './Back';
 
 const AddBook = () => {
   const [formData, setFormData] = useState({
@@ -49,6 +50,7 @@ const AddBook = () => {
 
   return (
     <div className="max-w-md mx-auto p-4">
+      <Back />
       <h2 className="text-2xl font-bold mb-4">Enter Book Details</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>

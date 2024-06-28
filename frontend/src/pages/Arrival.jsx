@@ -67,11 +67,11 @@ const Arrival = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {newArrivalBooks.slice(currentIndex, currentIndex + 3).map((book) => (
               <div key={book._id} className="bg-white rounded-lg shadow-md p-6">
-                <img
-                  src={book.authors.imageurl}
-                  alt={book.authors.bookname}
-                  className="w-full h-48 object-cover mb-4 rounded-md border border-gray-300 shadow-md"
-                />
+ <img
+  src={book.authors.imageurl}
+  alt={book.authors.bookname}
+  className="w-32 h-48 object-cover mb-4 rounded-md border border-gray-300 shadow-md mx-auto"
+/>
                 <h3 className="text-xl font-semibold mb-2">{book.authors.bookname}</h3>
                 <p className="text-black mb-2">Price: ${book.authors.price}</p>
               </div>

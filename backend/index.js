@@ -95,6 +95,16 @@ app.get('/users', async (req, res) => {
   }
 });
 
+app.get('/userss', async (req, res) => {
+  try {
+    const users = await User.find({ role: { $in: ['user', 'admin'] } });
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching users', error: error.message });
+  }
+});
+
+
 // Add a new book
 app.post('/submit', async (req, res) => {
   try {
@@ -246,6 +256,14 @@ app.post('/enquiry', async (req, res) => {
   }
 });
 
+app.get('/enquires', async (req, res) => {
+  try {
+    const enquiries = await Enquiry.find();
+    res.json(enquiries);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
 
 
 app.listen(PORT, () => {

@@ -50,6 +50,14 @@ const Boss = () => {
     navigate('/Purchases');
   };
 
+  const handleEnquiryDetails = () =>{
+    navigate('/EnquiryDetails');
+  };
+
+  const handleAnalytics = () =>{
+    navigate('/Analytics');
+  }
+
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', {
@@ -78,7 +86,7 @@ const Boss = () => {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <Navbar handleLogout={handleLogout} handleAddBook={handleAddBook} handleViewDetails={handleViewDetails} handlePurchaseDetails={handlePurchaseDetails} />
+      <Navbar handleLogout={handleLogout} handleAddBook={handleAddBook} handleViewDetails={handleViewDetails} handlePurchaseDetails={handlePurchaseDetails} handleEnquiryDetails = {handleEnquiryDetails}  handleAnalytics = {handleAnalytics}  />
       <div className="container mx-auto p-4">
         <div className="overflow-x-auto">
           <table className="min-w-full bg-white border border-gray-300">

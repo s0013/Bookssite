@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Back from './Back'
+import Back from './Back';
 
 function Purchases() {
   const [purchases, setPurchases] = useState([]);
@@ -12,38 +12,38 @@ function Purchases() {
   }, []);
 
   return (
-    <div className='mt-4'>
-    <Back />
-    <div className="container mx-auto">
-      <table className="min-w-full bg-white border border-gray-300">
-        <thead>
-          <tr>
-            <th className="px-6 py-3 bg-gray-100 border-b border-gray-300">Username</th>
-            <th className="px-6 py-3 bg-gray-100 border-b border-gray-300">Book Name</th>
-            <th className="px-6 py-3 bg-gray-100 border-b border-gray-300">Author</th>
-            <th className="px-6 py-3 bg-gray-100 border-b border-gray-300">Price</th>
-            <th className="px-6 py-3 bg-gray-100 border-b border-gray-300">Address</th>
-            <th className="px-6 py-3 bg-gray-100 border-b border-gray-300">Number of Copies</th>
-            <th className="px-6 py-3 bg-gray-100 border-b border-gray-300">Total Price</th>
-            <th className="px-6 py-3 bg-gray-100 border-b border-gray-300">Purchase Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          {purchases.map(purchase => (
-            <tr key={purchase._id}>
-              <td className="px-6 py-4 border-b border-gray-300">{purchase.username}</td>
-              <td className="px-6 py-4 border-b border-gray-300">{purchase.book.bookname}</td>
-              <td className="px-6 py-4 border-b border-gray-300">{purchase.book.author}</td>
-              <td className="px-6 py-4 border-b border-gray-300">{purchase.book.price}</td>
-              <td className="px-6 py-4 border-b border-gray-300">{purchase.address}</td>
-              <td className="px-6 py-4 border-b border-gray-300">{purchase.numCopies}</td>
-              <td className="px-6 py-4 border-b border-gray-300">{purchase.totalPrice}</td>
-              <td className="px-6 py-4 border-b border-gray-300">{new Date(purchase.purchaseDate).toLocaleDateString()}</td>
+    <div className="container mx-auto mt-4">
+      <Back />
+      <div className="overflow-x-auto">
+        <table className="min-w-full bg-white shadow-md rounded my-6">
+          <thead>
+            <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+              <th className="py-3 px-6 text-left">Username</th>
+              <th className="py-3 px-6 text-left">Book Name</th>
+              <th className="py-3 px-6 text-left">Author</th>
+              <th className="py-3 px-6 text-left">Price</th>
+              <th className="py-3 px-6 text-left">Address</th>
+              <th className="py-3 px-6 text-left">Number of Copies</th>
+              <th className="py-3 px-6 text-left">Total Price</th>
+              <th className="py-3 px-6 text-left">Purchase Date</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+          </thead>
+          <tbody className="text-gray-600 text-sm font-light">
+            {purchases.map(purchase => (
+              <tr key={purchase._id} className="border-b border-gray-200 hover:bg-gray-100">
+                <td className="py-3 px-6 text-left whitespace-nowrap">{purchase.username}</td>
+                <td className="py-3 px-6 text-left">{purchase.book.bookname}</td>
+                <td className="py-3 px-6 text-left">{purchase.book.author}</td>
+                <td className="py-3 px-6 text-left">${purchase.book.price}</td>
+                <td className="py-3 px-6 text-left">{purchase.address}</td>
+                <td className="py-3 px-6 text-left">{purchase.numCopies}</td>
+                <td className="py-3 px-6 text-left">${purchase.totalPrice.toFixed(2)}</td>
+                <td className="py-3 px-6 text-left">{new Date(purchase.purchaseDate).toLocaleDateString()}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

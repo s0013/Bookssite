@@ -26,7 +26,7 @@ const EnquiryForm = () => {
 
   return (
     <div className=" h-42 bg-cover bg-center" style={{ 
-      backgroundImage: `url('https://st4.depositphotos.com/1607243/39048/i/450/depositphotos_390482340-stock-photo-business-contact-icons-blue-background.jpg')`,
+      backgroundImage: `url('https://png.pngtree.com/background/20210710/original/pngtree-netted-document-background-material-picture-image_1033915.jpg')`,
       
     }}>
            <h1 className="text-3xl font-bold mb-6 font-cursive text-center">Submit Your Query Here!!</h1>

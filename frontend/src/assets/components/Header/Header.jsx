@@ -18,7 +18,7 @@ const Header = ({ hideNavbar }) => {
           <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
             {/* Logo */}
             <div className="flex-shrink-0">
-              <NavLink to="/" className="text-white text-lg font-bold">
+              <NavLink to="/" className="text-white text-lg font-bold font-cursive">
                 ExploreSphere
               </NavLink>
             </div>

@@ -23,7 +23,11 @@ import All from '../pages/All'
 import EnquiryForm from '../pages/EnquiryForm'
 import Arrival from '../pages/Arrival';
 import Ad from '../pages/Ad';
-
+import EnquiryDetails from '../pages/EnquiryDetails';
+import Show from '../pages/Show';
+import UserAnalytics from '../pages/UserAnalytics';
+import PurchaseAnalytics from '../pages/PurchaseAnalytics';
+import Analytics from '../pages/Analytics';
 
 const Routers = () => {
   return (
@@ -52,7 +56,11 @@ const Routers = () => {
       <Route path="/EnquiryForm" element={<EnquiryForm />} />
       <Route path="/Arrival" element={<Arrival />} />
       <Route path="/Ad" element={<Ad />} />
-  
+      <Route path="/EnquiryDetails" element={<EnquiryDetails />} />
+      <Route path="/Show" element={<Show />} />
+      <Route path="/UserAnalytics" element={<UserAnalytics />} />
+      <Route path="/PurchaseAnalytics" element={<PurchaseAnalytics />} />
+      <Route path="/Analytics" element={<Analytics />} />
 
     </Routes>
   );
