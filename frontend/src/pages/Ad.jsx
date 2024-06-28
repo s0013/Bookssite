@@ -23,7 +23,7 @@ const Ad = () => {
   }, []);
 
   return (
-    <div className=" bg-rose-700 text-white py-1">
+    <div className=" bg-blue-200 text-black py-1">
       <div className="container mx-auto flex justify-center">
         <div className="text-3xl font-bold mt-2 mb-2 font-cursive text-center">
           {announcements[currentAnnouncementIndex]}

@@ -4,6 +4,7 @@ import BooksByCategory from './BooksByCategory';
 import EnquiryForm from './EnquiryForm';
 import Arrival from './Arrival';
 import Ad from './Ad';
+import Authors from './Authors';
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
       <Ad />
       <BooksByCategory />
       <Arrival />
+      <Authors />
       <EnquiryForm />
     </div>
   );

@@ -28,6 +28,10 @@ import Show from '../pages/Show';
 import UserAnalytics from '../pages/UserAnalytics';
 import PurchaseAnalytics from '../pages/PurchaseAnalytics';
 import Analytics from '../pages/Analytics';
+import AuthorCard from '../pages/AuthorCard';
+import AuthorModal from '../pages/AuthorModal';
+import Authors from '../pages/Authors';
+
 
 const Routers = () => {
   return (
@@ -61,6 +65,9 @@ const Routers = () => {
       <Route path="/UserAnalytics" element={<UserAnalytics />} />
       <Route path="/PurchaseAnalytics" element={<PurchaseAnalytics />} />
       <Route path="/Analytics" element={<Analytics />} />
+      <Route path="/AuthorCard" element={<AuthorCard />} />
+      <Route path="/AuthorModal" element={<AuthorModal />} />
+      <Route path="/Authors" element={<Authors />} />
 
     </Routes>
   );
