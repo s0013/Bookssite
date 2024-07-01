@@ -5,6 +5,7 @@ import EnquiryForm from './EnquiryForm';
 import Arrival from './Arrival';
 import Ad from './Ad';
 import Authors from './Authors';
+import CustTest from './CustTest';
 
 const Home = () => {
   return (
@@ -15,6 +16,7 @@ const Home = () => {
       <BooksByCategory />
       <Arrival />
       <Authors />
+      <CustTest />
       <EnquiryForm />
     </div>
   );

@@ -6,6 +6,8 @@ import ReactPaginate from 'react-paginate';
 import Carousal from './Carousal'; // Import the Carousal component
 import Navbar from './Navbar';
 import Modal from './Modal'; // Import the Modal component
+import Arrival from './Arrival';
+import CustTest from './CustTest';
 
 const Customer = () => {
   const [username, setUsername] = useState('');
@@ -185,7 +187,12 @@ const Customer = () => {
         />
       </div>
       <Modal isOpen={isModalOpen} onClose={closeModal} book={modalContent} />
+      <Arrival />
+      <CustTest />
     </div>
+
+   
+
   );
 };
 

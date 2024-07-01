@@ -5,6 +5,7 @@ const User = require('./models/User');
 const Book = require('./models/Book');
 const Purchase = require('./models/Purchase'); // Import the Purchase model
 const Enquiry = require('./models/Enquiry');
+const Feedback = require('./models/Feedback');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -265,6 +266,18 @@ app.get('/enquires', async (req, res) => {
   }
 });
 
+// Feedback Endpoint
+app.post('/feedback', async (req, res) => {
+  const { name, email, mobileNo, message } = req.body;
+
+  try {
+    const newFeedback = new Feedback({ name, email, mobileNo, message });
+    await newFeedback.save();
+    res.status(201).json({ message: 'Feedback submitted successfully' });
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to submit feedback' });
+  }
+});
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

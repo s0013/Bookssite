@@ -31,7 +31,8 @@ import Analytics from '../pages/Analytics';
 import AuthorCard from '../pages/AuthorCard';
 import AuthorModal from '../pages/AuthorModal';
 import Authors from '../pages/Authors';
-
+import CustTest from '../pages/CustTest';
+import Feedback from '../pages/Feedback';
 
 const Routers = () => {
   return (
@@ -68,6 +69,8 @@ const Routers = () => {
       <Route path="/AuthorCard" element={<AuthorCard />} />
       <Route path="/AuthorModal" element={<AuthorModal />} />
       <Route path="/Authors" element={<Authors />} />
+      <Route path="/CustTest" element={<CustTest />} />
+      <Route path="/Feedback" element={<Feedback />} />
 
     </Routes>
   );
